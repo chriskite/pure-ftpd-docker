@@ -1,1 +1,1 @@
-# pureftp-docker
+# pure-ftpd-docker
