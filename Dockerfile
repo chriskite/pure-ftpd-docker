@@ -28,12 +28,14 @@ RUN dpkg -i /tmp/pure-ftpd/pure-ftpd_*.deb
 # Prevent pure-ftpd upgrading
 RUN apt-mark hold pure-ftpd pure-ftpd-common
 
-# Setup ftp user and group, and virtual users
-ADD setup-ftp.sh /tmp/
-RUN /tmp/setup-ftp.sh
-
+# Runit for pure-ftpd
 RUN mkdir /etc/service/pure-ftpd
 ADD pure-ftpd.sh /etc/service/pure-ftpd/run
+
+# Setup ftp user and group, and virtual users
+ADD setup-ftp.sh /tmp/
+ADD virtual-users /tmp/
+RUN /tmp/setup-ftp.sh
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
