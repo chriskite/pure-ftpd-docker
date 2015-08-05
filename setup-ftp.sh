@@ -1,7 +1,7 @@
 #!/bin/bash
 groupadd ftpgroup && \
 useradd -g ftpgroup -d /dev/null -s /etc ftpuser && \
-mkdir /home/ftpusers
+mkdir -p /home/ftpusers
 
 while IFS=: read u p
 do
